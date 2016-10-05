@@ -1,0 +1,28 @@
+{
+    "name": "Umbrella/Form",
+    "description": "Package to ",
+    "homepage": "http://alvesdouglas.com.br/",
+    "keywords": [
+        "backfront",
+        "form",
+        "post",
+        "ajax"
+    ],
+    "license": "Apache License 2.0",
+    "authors": [
+        {
+            "name": "Douglas Alves",
+            "email": "alves.douglaz@gmail.com",
+            "homepage": "http://alvesdouglas.com.br/",
+            "role": "Creator"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Umbrella\\": "src/Umbrella/"
+        }
+    }
+}
