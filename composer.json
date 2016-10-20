@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Backfront\\": "src/backfront/"
+            "Backfront\\": "src/Backfront/"
         }
     }
 }
