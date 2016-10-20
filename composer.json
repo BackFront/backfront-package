@@ -1,6 +1,6 @@
 {
-    "name": "Umbrella/Form",
-    "description": "Package to ",
+    "name": "Backfront/Form",
+    "description": "Halper Package",
     "homepage": "http://alvesdouglas.com.br/",
     "keywords": [
         "backfront",
@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Umbrella\\": "src/Umbrella/"
+            "Backfront\\": "src/backfront/"
         }
     }
 }
