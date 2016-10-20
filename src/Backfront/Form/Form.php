@@ -20,7 +20,7 @@
  * @since 1.0.0
  */
 
-namespace Backfront
+namespace Backfront/Form
 {
 
     class Form
