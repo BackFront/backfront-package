@@ -2,3 +2,8 @@
 .bfe.bottom-10 > .row {margin-bottom: 10px;}
 .bfe.bottom-15 > .row {margin-bottom: 15px;}
 .bfe.bottom-20 > .row {margin-bottom: 20px;}
+
+.bfe.top-5 > .row {margin-top: 5px;}
+.bfe.top-10 > .row {margin-top: 10px;}
+.bfe.top-15 > .row {margin-top: 15px;}
+.bfe.top-20 > .row {margin-top: 20px;}
