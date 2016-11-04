@@ -20,13 +20,14 @@
  * @since 1.0.0
  */
 
-namespace Backfront/Form
+namespace Backfront\Form
 {
 
-    class Form
+    class Form extends FormFields
     {
 
         private $form_id;
+        private $form_class;
         private $fields;
         private $method = "post";
         private $action;
@@ -41,6 +42,7 @@ namespace Backfront/Form
         function __construct($form_id)
         {
             $this->form_id = $form_id;
+            return $this;
         }
 
         /**
@@ -49,7 +51,7 @@ namespace Backfront/Form
          * @param string $method
          * @return \Backfront\Form
          */
-        public function setMethod($method = "post")
+        public function setMethod($method)
         {
             $this->method = $method;
             return $this;
@@ -68,6 +70,18 @@ namespace Backfront/Form
         }
 
         /**
+         * <h3>setFormClass</h3>
+         * 
+         * @param array $action
+         * @return \Backfront\Form
+         */
+        public function setFormClass(array $class)
+        {
+            $this->form_class = $class;
+            return $this;
+        }
+
+        /**
          * <h3>hasFile</h3>
          * 
          * @param bool $i Set <i>true</i> or <i>false</i> to especific enctype form as <b>multipart/form-data<b>
@@ -76,6 +90,18 @@ namespace Backfront/Form
         public function hasFile($i = true)
         {
             $this->has_file = $i;
+            return $this;
+        }
+
+        /**
+         * <h3>addField</h3>
+         * 
+         * @param type $args
+         * @return \Backfront\Form\Form
+         */
+        public function addField($args)
+        {
+            $this->fields[] = $args;
             return $this;
         }
 
@@ -90,8 +116,8 @@ namespace Backfront/Form
          */
         public function createField($args, $show = false)
         {
+            $form = self::$args['type']($args);
             if ($show) {
-                $form = self::$args['type']($args);
                 echo $form;
             }
 
@@ -124,10 +150,10 @@ namespace Backfront/Form
          */
         public function build($show = false)
         {
-            $this->renderFields();
             $has_file = (!$this->has_file) ? null : 'enctype="multipart/form-data"';
-            $form = "<form name=\"{$this->form_id}\" id=\"{$this->form_id}\" action=\"{$this->action}\" method=\"{$this->method}\" {$has_file}>";
-            //$form .= $this->renderFields();
+            $classes = implode(" ", $this->form_class);
+            $form = "<form name=\"{$this->form_id}\" id=\"{$this->form_id}\" action=\"{$this->action}\" method=\"{$this->method}\" class=\"{$classes}\" {$has_file}>";
+            $form .= $this->renderFields();
             $form .= "</form>";
 
             if ($show)
@@ -148,11 +174,13 @@ namespace Backfront/Form
          */
         private function renderFields()
         {
-            if (empty($this->fields_render)):
-                foreach ($this->fields as $val) {
-                    $this->fields_render[] = $this->createField($val);
-                }
+            if (!empty($this->fields_render)):
+                $this->fields_render = null;
             endif;
+
+            foreach ($this->fields as $val):
+                $this->fields_render .= $this->createField($val);
+            endforeach;
 
             return $this->fields_render;
         }

@@ -52,7 +52,7 @@ namespace Backfront\Form
         
         public static function text($args)
         {
-            
+            return "olá mundo";
         }
         
         public static function textarea($args)
