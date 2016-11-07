@@ -12,6 +12,7 @@
         <title>BackFront</title>
 
         <!-- Bootstrap core CSS -->
+        <link href="<?php echo ASSETS_URL ?>/libs/semantic_ui/semantic.min.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/libs/prism/prism.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/css/main.css" rel="stylesheet">
