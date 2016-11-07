@@ -44,7 +44,7 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                             ->addField(array(
                                 "id" => "bootstrap_field_checkbox", //required
                                 "type" => "checkbox", //required
-                                "label" => "Textarea", //optional
+                                "label" => "Checkbox", //optional
                                 "value" => "hello world", //optional
                                 "checked" => true, //optional | default: false
                             ))
@@ -86,6 +86,13 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                         "placeholder" => "Placeholder"
                                     ]
                                 )
+                            ))
+                            ->addField(array(
+                                "id" => "semantic_checkbox_field_checkbox", //required
+                                "type" => "checkbox", //required
+                                "label" => "Checkbox", //optional
+                                "value" => "hello", //optional
+                                "checked" => true, //optional | default: false
                             ))
                             ->build(true);
                     ?>
