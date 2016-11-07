@@ -24,7 +24,7 @@ namespace Backfront\Form
 {
 
     use Backfront\Form\FormFields;
-    
+
     class Form extends FormFields
     {
 
@@ -40,9 +40,11 @@ namespace Backfront\Form
         /**
          * <h3>Form</h3>
          * 
-         * @param type $form_id
+         * @param string $form_id
+         * @param Object $form_fields a abstract class responsible to generate the html of fields
+         * @return \Backfront\Form\Form
          */
-        function __construct($form_id, FormFields $form_fields = null)
+        function __construct($form_id, $form_fields = null)
         {
             $this->form_id = $form_id;
             $this->form_fields = $form_fields;
@@ -120,11 +122,10 @@ namespace Backfront\Form
          */
         public function createField($args, $show = false)
         {
-            $form = self::$args['type']($args);
+            $form = ($this->form_fields) ? $this->form_fields->$args['type']($args) : self::$args['type']($args);
             if ($show) {
                 echo $form;
             }
-
             return $form;
         }
 
