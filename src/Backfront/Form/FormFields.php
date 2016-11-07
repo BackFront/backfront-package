@@ -49,7 +49,7 @@ namespace Backfront\Form
         {
             trigger_error("O field de tipo <i>{$name}</i> não pode ser gerado", E_USER_WARNING);
         }
-        
+
         /**
          * <h3>text</h3>
          * 
@@ -73,14 +73,14 @@ namespace Backfront\Form
 
         public static function textarea($args)
         {
-            $args['value'] = (isset($args['value']))? $args['value'] : null;
+            $args['value'] = (isset($args['value'])) ? $args['value'] : null;
             $args['textarea']['attrs']['id'] = $args['id'];
             $args['textarea']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
             $args['textarea']['attrs']['row'] = (!empty($args['input']['attrs']['row'])) ? $args['row'] : 3;
 
             $attrs_textarea = (!empty($args['textarea']['attrs'])) ? self::get_attrs($args['textarea']['attrs']) : null;
             $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
-            
+
             $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
             $html .= "<textarea {$attrs_textarea}></textarea>";
             return self::field_wrapp($html);
@@ -93,7 +93,20 @@ namespace Backfront\Form
 
         public static function checkbox($args)
         {
-            
+            $args['value'] = (isset($args['value'])) ? $args['value'] : null;
+            $args['input']['attrs']['type'] = 'checkbox';
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+
+            $html = "<div class=\"checkbox\">";
+            $html .= "<label>";
+            $html .= "<input {$attrs_input}" . self::is_checked($args) . "> {$args['label']}";
+            $html .= "</label>";
+            $html .= "</div>";
+
+            return $html;
         }
 
         public static function radio($args)
@@ -179,12 +192,16 @@ namespace Backfront\Form
          */
         public static function is_selected($current, $selected, $type = "select")
         {
-            $s = null;
             if ($current == $selected && $type == 'select')
                 return "selected=\"selected\" ";
             if ($current == $selected && $type == 'check')
                 return "checked=\"checked\" ";
             return;
+        }
+
+        public static function is_checked($args)
+        {
+            return (isset($args['checked']) && $args['checked'] === true) ? "checked='checked'" : null;
         }
 
         public static function field_wrapp($html_field, array $args = null)
