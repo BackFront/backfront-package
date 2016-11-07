@@ -49,13 +49,18 @@ namespace Backfront\Form
         {
             trigger_error("O field de tipo <i>{$name}</i> não pode ser gerado", E_USER_WARNING);
         }
-
+        
+        /**
+         * <h3>text</h3>
+         * 
+         * @param array $args
+         * @return string $html html of the input type text
+         */
         public static function text($args)
         {
             $args['input']['attrs']['type'] = 'text';
             $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
-
 
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
             $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
@@ -68,7 +73,17 @@ namespace Backfront\Form
 
         public static function textarea($args)
         {
+            $args['value'] = (isset($args['value']))? $args['value'] : null;
+            $args['textarea']['attrs']['id'] = $args['id'];
+            $args['textarea']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['textarea']['attrs']['row'] = (!empty($args['input']['attrs']['row'])) ? $args['row'] : 3;
+
+            $attrs_textarea = (!empty($args['textarea']['attrs'])) ? self::get_attrs($args['textarea']['attrs']) : null;
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
             
+            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
+            $html .= "<textarea {$attrs_textarea}></textarea>";
+            return self::field_wrapp($html);
         }
 
         public static function number($args)
