@@ -29,10 +29,10 @@ namespace Backfront\Form
     {
 
         private $form_id;
-        private $form_class;
+        private $form_class = array();
         private $fields;
         private $method = "post";
-        private $action;
+        private $action = null;
         private $has_file = false;
         protected $fields_render;
         protected $form_fields;
@@ -156,7 +156,7 @@ namespace Backfront\Form
         public function build($show = false)
         {
             $has_file = (!$this->has_file) ? null : 'enctype="multipart/form-data"';
-            $classes = implode(" ", $this->form_class);
+            $classes =  implode(" ", $this->form_class);
             $form = "<form name=\"{$this->form_id}\" id=\"{$this->form_id}\" action=\"{$this->action}\" method=\"{$this->method}\" class=\"{$classes}\" {$has_file}>";
             $form .= $this->renderFields();
             $form .= "</form>";
