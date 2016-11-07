@@ -8,7 +8,13 @@
 .bfe.top-15 > .row {margin-top: 15px;}
 .bfe.top-20 > .row {margin-top: 20px;}
 
-pre[class*="language-"] {
-    padding: auto;
-    margin: auto;
+pre[class*="language-"] { padding: auto; margin: auto; }
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
 }
+.bs-callout-info { border-left-color: #1b809e;}

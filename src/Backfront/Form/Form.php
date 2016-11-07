@@ -23,6 +23,8 @@
 namespace Backfront\Form
 {
 
+    use Backfront\Form\FormFields;
+    
     class Form extends FormFields
     {
 
@@ -33,15 +35,17 @@ namespace Backfront\Form
         private $action;
         private $has_file = false;
         protected $fields_render;
+        protected $form_fields;
 
         /**
          * <h3>Form</h3>
          * 
          * @param type $form_id
          */
-        function __construct($form_id)
+        function __construct($form_id, FormFields $form_fields = null)
         {
             $this->form_id = $form_id;
+            $this->form_fields = $form_fields;
             return $this;
         }
 

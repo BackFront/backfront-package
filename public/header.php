@@ -16,7 +16,7 @@
         <link href="<?php echo ASSETS_URL ?>/libs/prism/prism.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/css/main.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/jumbotron.css" rel="stylesheet">
-        
+
         <script src="<?php echo ASSETS_URL ?>/libs/jquery.min.js"></script>
         <script src="<?php echo ASSETS_URL ?>/libs/prism/prism.js"></script>
     </head>
@@ -47,3 +47,7 @@
                 </div><!--/.navbar-collapse -->
             </div>
         </nav>
+        <main class="container bfe top-20">
+            <div class="row">
+                <div class="col-md-12">
+
