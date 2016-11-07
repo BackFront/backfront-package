@@ -52,7 +52,18 @@ namespace Backfront\Form
 
         public static function text($args)
         {
-            return "olá mundo";
+            $args['input']['attrs']['type'] = 'text';
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+
+
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+
+            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
+            $html .= "<input {$attrs_input}>";
+
+            return self::field_wrapp($html);
         }
 
         public static function textarea($args)
@@ -79,7 +90,7 @@ namespace Backfront\Form
         {
             
         }
-        
+
         public static function file_input($args)
         {
             
@@ -139,8 +150,7 @@ namespace Backfront\Form
         {
             
         }
-        
-        
+
         /**
          * <h3>is_selected</h3>
          * 
@@ -161,5 +171,24 @@ namespace Backfront\Form
                 return "checked=\"checked\" ";
             return;
         }
+
+        public static function field_wrapp($html_field, array $args = null)
+        {
+            $class = (!empty($args['class'])) ? $args['class'] : 'form-group'; //default: bootstrap class
+            return "<div class=\"{$class}\">{$html_field}</div>";
+        }
+
+        public static function get_attrs(array $attrs = null)
+        {
+            $str_attrs = null;
+            foreach ($attrs as $key => $value):
+                if (is_array($value)) {
+                    $value = implode(" ", $value);
+                }
+                $str_attrs.= "{$key}=\"{$value}\" ";
+            endforeach;
+            return $str_attrs;
+        }
+
     }
 }
