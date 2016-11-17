@@ -58,6 +58,23 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                     ),
                                 )
                             ))
+                            ->addField(array(
+                                "id" => "bootstrap_field_select", //required
+                                "name" => "bootstrap_field_select", //required
+                                "type" => "select", //required
+                                "multiple" => true,
+                                "label" => "Select multiple", //optional
+                                "selected" => array(2, 4, 7), //Set array to multiple selections
+                                "options" => array(
+                                    1 => "One",
+                                    2 => "Two",
+                                    3 => "Tree",
+                                    4 => "Four",
+                                    5 => "Five",
+                                    6 => "Six",
+                                    7 => "Seven"
+                                )
+                            ))
                             ->addField(array("type" => "separator"))
                             ->addField(array(
                                 "id" => "bootstrap_field_checkbox", //required
