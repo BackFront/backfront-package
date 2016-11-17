@@ -139,8 +139,8 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 )
                             ))
                             ->addField(array(
-                                "id" => "bootstrap_field_select", //required
-                                "name" => "bootstrap_field_select", //required
+                                "id" => "semantic_field_select", //required
+                                "name" => "semantic_field_select", //required
                                 "type" => "select", //required
                                 "label" => "Select", //optional
                                 "selected" => "lemon", //optional
@@ -173,14 +173,14 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                             ->addField(array("type" => "separator"))
                             ->addField(array(
                                 "id" => "semantic_field_radio", //required
-                                "name" => "bootstrap_field_radio", //required
+                                "name" => "semantic_field_radio", //required
                                 "type" => "radio", //required
                                 "label" => "Radio default", //optional
                                 "checked" => false, //optional | default: false
                             ))
                             ->addField(array(
                                 "id" => "semantic_field_radio2", //required
-                                "name" => "bootstrap_field_radio", //required
+                                "name" => "semantic_field_radio", //required
                                 "type" => "radio", //required
                                 "variation" => "slider", //required
                                 "label" => "Radio slider", //optional
@@ -189,7 +189,7 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                             ))
                             ->addField(array(
                                 "id" => "semantic_field_radio3", //required
-                                "name" => "bootstrap_field_radio", //required
+                                "name" => "semantic_field_radio", //required
                                 "type" => "radio", //required
                                 "variation" => 'toggle', //optional
                                 "label" => "Radio toogle", //optional
@@ -203,6 +203,8 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
     </div>
 </div>
 
+<!-- Load Scripts-->
+<script src="<?php echo ASSETS_URL ?>/js/ex_class_form.js"></script>
 
 <?php
 require_once (dirname(__FILE__) . '/../footer.php');

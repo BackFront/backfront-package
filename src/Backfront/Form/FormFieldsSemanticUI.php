@@ -124,7 +124,24 @@ namespace Backfront\Form
 
         public static function select($args)
         {
-            
+            $args['select']['attrs']['id'] = $args['id'];
+            $args['select']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['select']['attrs']['class'][] = "ui search selection dropdown";
+
+            $attrs_select = (!empty($args['select']['attrs'])) ? self::get_attrs($args['select']['attrs']) : null;
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+
+            $html = "  <label {$attrs_label} for=\"{$args['id']}\">{$args['label']}</label>";
+            $html .= "<select {$attrs_select} data-dropdown>";
+            foreach ($args['options'] as $key => $value) {
+                if (!is_array($value)):
+                    $html .= "<option value=\"{$key}\" " . self::is_selected($key, $args['selected']) . ">{$value}</option>";
+                else:
+                    $html .= "<option value=\"{$key}\" " . self::get_attrs($value['attrs']) . self::is_selected($key, $args['selected']) . ">{$value['value']}</option>";
+                endif;
+            }
+            $html .="</select>";
+            return self::field_wrapp($html);
         }
 
         public static function file_input($args)

@@ -21,7 +21,6 @@
         <script src="<?php echo ASSETS_URL ?>/libs/jquery.min.js"></script>
         <script src="<?php echo ASSETS_URL ?>/libs/prism/prism.js"></script>
         <script src="<?php echo ASSETS_URL ?>/libs/semantic_ui/semantic.min.js"></script>
-        <script src="<?php echo ASSETS_URL ?>/js/ex_class_form.js"></script>
     </head>
 
     <body>
