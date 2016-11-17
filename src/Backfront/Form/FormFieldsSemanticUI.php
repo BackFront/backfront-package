@@ -98,7 +98,7 @@ namespace Backfront\Form
 
             return self::field_wrapp($html, array("class" => "inline field " . self::is_disabled($args)));
         }
-        
+
         /**
          * <h3>radio</h3>
          * 
@@ -132,7 +132,7 @@ namespace Backfront\Form
             $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
 
             $html = "  <label {$attrs_label} for=\"{$args['id']}\">{$args['label']}</label>";
-            $html .= "<select {$attrs_select} data-dropdown>";
+            $html .= "<select {$attrs_select} " . self::is_multiple($args) . " data-dropdown>";
             foreach ($args['options'] as $key => $value) {
                 if (!is_array($value)):
                     $html .= "<option value=\"{$key}\" " . self::is_selected($key, $args['selected']) . ">{$value}</option>";
@@ -177,9 +177,12 @@ namespace Backfront\Form
          */
         public static function is_selected($current, $selected, $type = "select")
         {
-            $s = null;
+            if (is_array($selected) && in_array($current, $selected))
+                return "selected=\"selected\" ";
+
             if ($current == $selected && $type == 'select')
                 return "selected=\"selected\" ";
+
             if ($current == $selected && $type == 'check')
                 return "checked=\"checked\" ";
             return;
@@ -193,6 +196,11 @@ namespace Backfront\Form
         public static function is_disabled($args)
         {
             return (isset($args['disabled']) && $args['disabled'] === true) ? "disabled" : null;
+        }
+
+        public static function is_multiple($args)
+        {
+            return (isset($args['multiple']) && $args['multiple'] === true) ? "multiple" : null;
         }
 
         public static function field_wrapp($html_field, array $args = null)

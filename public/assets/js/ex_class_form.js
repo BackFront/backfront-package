@@ -3,4 +3,4 @@ jQuery(document).ready(function ($) {
 });
 
 // USED TO <select>
-$('select.dropdown').dropdown({});
+$('.ui[data-dropdown]').dropdown({});
