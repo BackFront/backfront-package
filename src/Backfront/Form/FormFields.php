@@ -103,15 +103,16 @@ namespace Backfront\Form
 
             return $html;
         }
-        
+
         public static function radio($args)
         {
+            $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['type'] = 'radio';
             $args['input']['attrs']['value'] = (isset($args['value'])) ? $args['value'] : null;
-            $args['input']['attrs']['name'] = (!empty($args['name'])) ? $args['name'] : $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['name'])) ? $args['name'] : null;
 
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
-            
+
             $html = "<div class=\"radio\">";
             $html .= "  <label>";
             $html .= "      <input {$attrs_input}" . self::is_checked($args) . self::is_disabled($args) . "> {$args['label']}";
@@ -121,12 +122,29 @@ namespace Backfront\Form
             return $html;
         }
 
-        public static function number($args)
+        public static function select($args)
         {
-            
+            $args['select']['attrs']['id'] = $args['id'];
+            $args['select']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['select']['attrs']['class'][] = "form-control";
+
+            $attrs_select = (!empty($args['select']['attrs'])) ? self::get_attrs($args['select']['attrs']) : null;
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+
+            $html = "  <label {$attrs_label} for=\"{$args['id']}\">{$args['label']}</label>";
+            $html .= "<select {$attrs_select}>";
+            foreach ($args['options'] as $key => $value) {
+                if (!is_array($value)):
+                    $html .= "<option value=\"{$key}\" " . self::is_selected($key, $args['selected']) . ">{$value}</option>";
+                else:
+                    $html .= "<option value=\"{$key}\" " . self::get_attrs($value['attrs']) . self::is_selected($key, $args['selected']) . ">{$value['value']}</option>";
+                endif;
+            }
+            $html .="</select>";
+            return self::field_wrapp($html);
         }
 
-        public static function select($args)
+        public static function number($args)
         {
             
         }

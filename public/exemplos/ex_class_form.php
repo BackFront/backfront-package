@@ -42,6 +42,24 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 )
                             ))
                             ->addField(array(
+                                "id" => "bootstrap_field_select", //required
+                                "name" => "bootstrap_field_select", //required
+                                "type" => "select", //required
+                                "label" => "Select", //optional
+                                "selected" => "lemon", //optional
+                                "options" => array(
+                                    "banana" => "Banana",
+                                    "lemon" => "Lemon",
+                                    "guitar" => array(
+                                        "value" => "Guitar",
+                                        "attrs" => [
+                                            'disabled' => true
+                                        ]
+                                    ),
+                                )
+                            ))
+                            ->addField(array("type" => "separator"))
+                            ->addField(array(
                                 "id" => "bootstrap_field_checkbox", //required
                                 "type" => "checkbox", //required
                                 "label" => "Checkbox", //optional
@@ -120,6 +138,24 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                     ]
                                 )
                             ))
+                            ->addField(array(
+                                "id" => "bootstrap_field_select", //required
+                                "name" => "bootstrap_field_select", //required
+                                "type" => "select", //required
+                                "label" => "Select", //optional
+                                "selected" => "lemon", //optional
+                                "options" => array(
+                                    "banana" => "Banana",
+                                    "lemon" => "Lemon",
+                                    "guitar" => array(
+                                        "value" => "Guitar",
+                                        "attrs" => [
+                                            'disabled' => true
+                                        ]
+                                    ),
+                                )
+                            ))
+                            ->addField(array("type" => "separator"))
                             ->addField(array(
                                 "id" => "semantic_checkbox_field_checkbox", //required
                                 "type" => "checkbox", //required
