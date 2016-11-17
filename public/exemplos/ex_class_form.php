@@ -55,11 +55,30 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "value" => "hello world", //optional
                                 "disabled" => true, //optional
                             ))
+                            ->addField(array("type" => "separator"))
                             ->addField(array(
                                 "id" => "bootstrap_field_radio", //required
+                                "name" => "bootstrap_field_radio", //required
                                 "type" => "radio", //required
                                 "label" => "Radio", //optional
                                 "value" => "It's my radio button", //optional
+                                "checked" => false, //optional | default: false
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_field_radio2", //required
+                                "name" => "bootstrap_field_radio", //required
+                                "type" => "radio", //required
+                                "label" => "Radio 02", //optional
+                                "value" => "", //optional
+                                "checked" => false, //optional | default: false
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_field_radio3", //required
+                                "name" => "bootstrap_field_radio", //required
+                                "type" => "radio", //required
+                                "disabled" => true, //optional
+                                "label" => "Radio 03 disabled", //optional
+                                "value" => "", //optional
                                 "checked" => false, //optional | default: false
                             ))
                             ->build(true);
@@ -114,7 +133,31 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "label" => "Disabled", //optional
                                 "value" => "hello", //optional
                                 "disabled" => true, //optional | default: false
-                                
+                            ))
+                            ->addField(array("type" => "separator"))
+                            ->addField(array(
+                                "id" => "semantic_field_radio", //required
+                                "name" => "bootstrap_field_radio", //required
+                                "type" => "radio", //required
+                                "label" => "Radio default", //optional
+                                "checked" => false, //optional | default: false
+                            ))
+                            ->addField(array(
+                                "id" => "semantic_field_radio2", //required
+                                "name" => "bootstrap_field_radio", //required
+                                "type" => "radio", //required
+                                "variation" => "slider", //required
+                                "label" => "Radio slider", //optional
+                                "value" => "", //optional
+                                "checked" => false, //optional | default: false
+                            ))
+                            ->addField(array(
+                                "id" => "semantic_field_radio3", //required
+                                "name" => "bootstrap_field_radio", //required
+                                "type" => "radio", //required
+                                "variation" => 'toggle', //optional
+                                "label" => "Radio toogle", //optional
+                                "value" => "", //optional
                             ))
                             ->build(true);
                     ?>

@@ -91,17 +91,35 @@ namespace Backfront\Form
 
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
 
-            $html = "<div class=\"ui toggle checkbox " . self::is_checked($args) . "\">";
+            $html = "<div class=\"ui toggle checkbox " . self::is_checked($args) . "\"> ";
             $html .= "<input {$attrs_input} " . self::is_disabled($args) . ">";
             $html .= "<label>{$args['label']}</label>";
             $html .= "</div>";
 
             return self::field_wrapp($html, array("class" => "inline field " . self::is_disabled($args)));
         }
-
+        
+        /**
+         * <h3>radio</h3>
+         * 
+         * @param array $args['variation'] Different styles, choice between: slider | toggle | radio(default)
+         */
         public static function radio($args)
         {
-            
+            $args['input']['attrs']['type'] = 'radio';
+            $args['input']['attrs']['value'] = (isset($args['value'])) ? $args['value'] : null;
+            $args['input']['attrs']['name'] = (!empty($args['name'])) ? $args['name'] : $args['id'];
+
+            $args['variation'] = (isset($args['variation'])) ? $args['variation'] : 'radio';
+
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+
+            $html = "<div class=\"ui {$args['variation']} checkbox\">";
+            $html .= "  <input {$attrs_input}" . self::is_checked($args) . self::is_disabled($args) . "> ";
+            $html .= "  <label>{$args['label']}</label>";
+            $html .= "</div>";
+
+            return self::field_wrapp($html, array("class" => "inline field " . self::is_disabled($args)));
         }
 
         public static function select($args)
@@ -122,6 +140,11 @@ namespace Backfront\Form
         public static function button($args)
         {
             
+        }
+
+        public static function separator()
+        {
+            return "<hr />";
         }
 
         /**
