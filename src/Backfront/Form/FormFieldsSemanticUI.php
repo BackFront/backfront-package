@@ -91,12 +91,12 @@ namespace Backfront\Form
 
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
 
-            $html = "<div class=\"ui toggle checkbox ".self::is_checked($args)."\">";
-            $html .= "<input {$attrs_input} >";
+            $html = "<div class=\"ui toggle checkbox " . self::is_checked($args) . "\">";
+            $html .= "<input {$attrs_input} " . self::is_disabled($args) . ">";
             $html .= "<label>{$args['label']}</label>";
             $html .= "</div>";
-            
-            return self::field_wrapp($html, array("class" => "inline field"));
+
+            return self::field_wrapp($html, array("class" => "inline field " . self::is_disabled($args)));
         }
 
         public static function radio($args)
@@ -144,10 +144,15 @@ namespace Backfront\Form
                 return "checked=\"checked\" ";
             return;
         }
-        
+
         public static function is_checked($args)
         {
             return (isset($args['checked']) && $args['checked'] === true) ? "checked" : null;
+        }
+
+        public static function is_disabled($args)
+        {
+            return (isset($args['disabled']) && $args['disabled'] === true) ? "disabled" : null;
         }
 
         public static function field_wrapp($html_field, array $args = null)

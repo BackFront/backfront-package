@@ -48,6 +48,20 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "value" => "hello world", //optional
                                 "checked" => true, //optional | default: false
                             ))
+                            ->addField(array(
+                                "id" => "bootstrap_field_checkbox_disabled", //required
+                                "type" => "checkbox", //required
+                                "label" => "Disabled", //optional
+                                "value" => "hello world", //optional
+                                "disabled" => true, //optional
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_field_radio", //required
+                                "type" => "radio", //required
+                                "label" => "Radio", //optional
+                                "value" => "It's my radio button", //optional
+                                "checked" => false, //optional | default: false
+                            ))
                             ->build(true);
                     ?>
                 </div>
@@ -93,6 +107,14 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "label" => "Checkbox", //optional
                                 "value" => "hello", //optional
                                 "checked" => true, //optional | default: false
+                            ))
+                            ->addField(array(
+                                "id" => "semantic_checkbox_field_checkbox_disabled", //required
+                                "type" => "checkbox", //required
+                                "label" => "Disabled", //optional
+                                "value" => "hello", //optional
+                                "disabled" => true, //optional | default: false
+                                
                             ))
                             ->build(true);
                     ?>

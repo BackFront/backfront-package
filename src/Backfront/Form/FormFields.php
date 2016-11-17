@@ -86,23 +86,18 @@ namespace Backfront\Form
             return self::field_wrapp($html);
         }
 
-        public static function number($args)
-        {
-            
-        }
-
         public static function checkbox($args)
         {
             $args['value'] = (isset($args['value'])) ? $args['value'] : null;
             $args['input']['attrs']['type'] = 'checkbox';
             $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
-
-            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
-
-            $html = "<div class=\"checkbox\">";
+            
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;            
+            
+            $html = "<div class=\"checkbox ". self::is_disabled($args) ."}\">";
             $html .= "<label>";
-            $html .= "<input {$attrs_input}" . self::is_checked($args) . "> {$args['label']}";
+            $html .= "<input {$attrs_input}" . self::is_checked($args) . self::is_disabled($args) ."> {$args['label']}";
             $html .= "</label>";
             $html .= "</div>";
 
@@ -110,6 +105,22 @@ namespace Backfront\Form
         }
 
         public static function radio($args)
+        {
+//            <div class="radio">
+//  <label>
+//    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+//    Option one is this and that&mdash;be sure to include why it's great
+//  </label>
+//</div>
+//<div class="radio">
+//  <label>
+//    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+//    Option two can be something else and selecting it will deselect option one
+//  </label>
+//</div>
+        }
+        
+        public static function number($args)
         {
             
         }
@@ -202,6 +213,11 @@ namespace Backfront\Form
         public static function is_checked($args)
         {
             return (isset($args['checked']) && $args['checked'] === true) ? "checked='checked'" : null;
+        }
+        
+        public static function is_disabled($args)
+        {
+            return (isset($args['disabled']) && $args['disabled'] === true) ? "disabled" : null;
         }
 
         public static function field_wrapp($html_field, array $args = null)
