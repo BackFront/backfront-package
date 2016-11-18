@@ -41,7 +41,7 @@ namespace Backfront\Form
          * <h3>Form</h3>
          * 
          * @param string $form_id
-         * @param Object $form_fields a abstract class responsible to generate the html of fields
+         * @param FormFields $form_fields a abstract class responsible to generate the html of fields
          * @return \Backfront\Form\Form
          */
         function __construct($form_id, $form_fields = null)

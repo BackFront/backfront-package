@@ -2,7 +2,7 @@
 require_once (dirname(__FILE__) . '/../header.php');
 
 use Backfront\Form\Form;
-use Backfront\Form\FormFieldsSemanticUI as FormFields;
+use Backfront\Form\SemanticUI\FormFields;
 
 $form = new Form('form_bootstrap');
 $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
