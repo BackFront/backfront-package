@@ -253,6 +253,30 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "label" => "Radio toogle", //optional
                                 "value" => "", //optional
                             ))
+                            ->addField(array("type" => "separator"))
+                            ->addField(array(
+                                "id" => "bootstrap_button", //required
+                                "type" => "button", //required
+                                "label" => "Default button"
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_button", //required
+                                "type" => "button", //required
+                                "label" => "Primary",
+                                "button" => array(
+                                    "attrs" => array(
+                                        "class" => "ui button primary"
+                                    ))
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_button", //required
+                                "type" => "button", //required
+                                "label" => "Secundary",
+                                "button" => array(
+                                    "attrs" => array(
+                                        "class" => "ui basic button green"
+                                    ))
+                            ))
                             ->build(true);
                     ?>
                 </div>

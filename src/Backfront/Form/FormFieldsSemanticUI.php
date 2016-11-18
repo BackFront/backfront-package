@@ -30,6 +30,7 @@
  * - image input
  * - submit
  * - button
+ * - hidden
  * - title
  * - separator
  * - url
@@ -156,7 +157,15 @@ namespace Backfront\Form
 
         public static function button($args)
         {
+            $args['button']['attrs']['type'] = "button";
+            $args['button']['attrs']['id'] = $args['id'];
+            $args['button']['attrs']['name'] = (!empty($args['button']['attrs']['name'])) ? $args['name'] : $args['id'];
             
+            $args['button']['attrs']['class'] = (!isset($args['button']['attrs']['class'])) ? 'ui button' : $args['button']['attrs']['class'];
+
+            $attrs_button = (!empty($args['button']['attrs'])) ? self::get_attrs($args['button']['attrs']) : null;
+
+            return $html = "<button {$attrs_button}>{$args['label']}</button> ";
         }
 
         public static function separator()
