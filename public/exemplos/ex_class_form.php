@@ -116,6 +116,30 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "value" => "", //optional
                                 "checked" => false, //optional | default: false
                             ))
+                            ->addField(array("type" => "separator"))
+                            ->addField(array(
+                                "id" => "bootstrap_button", //required
+                                "type" => "button", //required
+                                "label" => "Default button"
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_button", //required
+                                "type" => "button", //required
+                                "label" => "Primary",
+                                "button" => array(
+                                    "attrs" => array(
+                                        "class" => "btn btn-primary"
+                                    ))
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_button", //required
+                                "type" => "button", //required
+                                "label" => "Success",
+                                "button" => array(
+                                    "attrs" => array(
+                                        "class" => "btn btn-success"
+                                    ))
+                            ))
                             ->build(true);
                     ?>
                 </div>

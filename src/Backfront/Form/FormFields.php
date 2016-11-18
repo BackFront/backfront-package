@@ -30,6 +30,7 @@
  * - image input
  * - submit
  * - button
+ * - hidden
  * - title
  * - separator
  * - url
@@ -125,7 +126,7 @@ namespace Backfront\Form
         public static function select($args)
         {
             $args['select']['attrs']['id'] = $args['id'];
-            $args['select']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['select']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
             $args['select']['attrs']['class'][] = "form-control";
 
             $attrs_select = (!empty($args['select']['attrs'])) ? self::get_attrs($args['select']['attrs']) : null;
@@ -171,7 +172,15 @@ namespace Backfront\Form
 
         public static function button($args)
         {
+            $args['button']['attrs']['type'] = "button";
+            $args['button']['attrs']['id'] = $args['id'];
+            $args['button']['attrs']['name'] = (!empty($args['button']['attrs']['name'])) ? $args['name'] : $args['id'];
             
+            $args['button']['attrs']['class'] = (!isset($args['button']['attrs']['class'])) ? 'btn btn-default' : $args['button']['attrs']['class'];
+
+            $attrs_button = (!empty($args['button']['attrs'])) ? self::get_attrs($args['button']['attrs']) : null;
+
+            return $html = "<button {$attrs_button}>{$args['label']}</button> ";
         }
 
         public static function title($args)
