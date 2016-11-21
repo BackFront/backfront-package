@@ -175,7 +175,7 @@ namespace Backfront\Form
             $args['button']['attrs']['type'] = "button";
             $args['button']['attrs']['id'] = $args['id'];
             $args['button']['attrs']['name'] = (!empty($args['button']['attrs']['name'])) ? $args['name'] : $args['id'];
-            
+
             $args['button']['attrs']['class'] = (!isset($args['button']['attrs']['class'])) ? 'btn btn-default' : $args['button']['attrs']['class'];
 
             $attrs_button = (!empty($args['button']['attrs'])) ? self::get_attrs($args['button']['attrs']) : null;
@@ -183,9 +183,28 @@ namespace Backfront\Form
             return $html = "<button {$attrs_button}>{$args['label']}</button> ";
         }
 
+        public static function hidden($args)
+        {
+            $args['input']['attrs']['type'] = "hidden";
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['value'] = (isset($args['value'])) ? $args['value'] : null;
+
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+
+            return "<input {$attrs_input}>";
+        }
+
         public static function title($args)
         {
-            
+            $title = $args['title'];
+            $subtitle = (isset($args['subtitle'])) ? $args['subtitle'] : null;
+            $attrs = (!empty($args['attrs'])) ? self::get_attrs($args['attrs']) : null;
+
+
+            $html = "<div class=\"page-header\">";
+            $html .= sprintf("<h3 %s>%s <small>%s</small></h3>", $attrs, $title, $subtitle);
+            $html .= "</div>";
+            return $html;
         }
 
         public static function separator($args)

@@ -27,6 +27,8 @@ namespace Backfront\Form
 
     class Form extends FormFields
     {
+        const CFRS_AUTH = true;
+
 
         private $form_id;
         private $form_class = array();
@@ -36,6 +38,7 @@ namespace Backfront\Form
         private $has_file = false;
         protected $fields_render;
         protected $form_fields;
+        protected $csfr_token;
 
         /**
          * <h3>Form</h3>

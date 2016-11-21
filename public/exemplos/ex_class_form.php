@@ -19,6 +19,12 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                             ->setMethod('post')
                             //->setFormClass(['form-horizontal'])
                             ->addField(array(
+                                "id" => "bootstrap_title", //required
+                                "type" => "title", //required
+                                "title" => "Title", //required
+                                "subtitle" => "subtitle example" //optional
+                            ))
+                            ->addField(array(
                                 "id" => "bootstrap_field_text", //required
                                 "name" => "bootstrap_field_text", //optional
                                 "type" => "text", //required
