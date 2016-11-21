@@ -170,6 +170,16 @@ namespace Backfront\Form\SemanticUI
             return $html = "<button {$attrs_button}>{$args['label']}</button> ";
         }
 
+        public static function title($args)
+        {
+            $title = $args['title'];
+            $subtitle = (isset($args['subtitle'])) ? $args['subtitle'] : null;
+            
+            $attrs = (!empty($args['attrs'])) ? self::get_attrs($args['attrs']) : null;
+            
+            return sprintf("<h2 class=\"ui dividing header\" %s>%s <div class=\"sub header\">%s</div></h2>", $attrs, $title, $subtitle);
+        }
+
         public static function separator()
         {
             return "<hr />";

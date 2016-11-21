@@ -164,6 +164,12 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                             ->setMethod('post')
                             ->setFormClass(['ui', 'form', 'huge'])
                             ->addField(array(
+                                "id" => "semantic_title", //required
+                                "type" => "title", //required
+                                "title" => "Title", //required
+                                "subtitle" => "subtitle example" //optional
+                            ))
+                            ->addField(array(
                                 "id" => "semantic_field_text", //required
                                 "name" => "field_nome", //optional
                                 "type" => "text", //required
