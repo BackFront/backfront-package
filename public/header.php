@@ -14,11 +14,13 @@
         <!-- Bootstrap core CSS -->
         <link href="<?php echo ASSETS_URL ?>/libs/semantic_ui/semantic.min.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo ASSETS_URL ?>/libs/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/libs/prism/prism.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/css/main.css" rel="stylesheet">
         <link href="<?php echo ASSETS_URL ?>/jumbotron.css" rel="stylesheet">
 
         <script src="<?php echo ASSETS_URL ?>/libs/jquery.min.js"></script>
+        <script src="<?php echo ASSETS_URL ?>/libs/bootstrap-fileinput/js/fileinput.min.js"></script>
         <script src="<?php echo ASSETS_URL ?>/libs/prism/prism.js"></script>
         <script src="<?php echo ASSETS_URL ?>/libs/semantic_ui/semantic.min.js"></script>
     </head>

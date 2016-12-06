@@ -149,13 +149,28 @@ namespace Backfront\Form
         {
             
         }
-
+        
+        /**
+         * 
+         * @see docs http://plugins.krajee.com/file-input
+         */
         public static function file_input($args)
         {
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['input']['attrs']['type'] = 'file';
+            $args['input']['attrs']['class'][] = "file";
+            $args['input']['attrs']['data-min-file-count='] = 1;
             
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+            
+            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
+            $html .= "<input {$attrs_input} multiple>";
+            return self::field_wrapp($html);
         }
 
-        public static function upload_media($args)
+        public static function drag_and_drop($args)
         {
             
         }

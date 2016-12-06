@@ -146,6 +146,12 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                         "class" => "btn btn-success"
                                     ))
                             ))
+                            ->addField(array("type" => "separator"))
+                            ->addField(array(
+                                "id" => "bootstrap_file", //required
+                                "type" => "file_input", //required
+                                "label" => "Basic Input File"
+                            ))
                             ->build(true);
                     ?>
                 </div>
