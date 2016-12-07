@@ -192,7 +192,6 @@ namespace Backfront\Form
             $args['button']['attrs']['name'] = (!empty($args['button']['attrs']['name'])) ? $args['name'] : $args['id'];
 
             $args['button']['attrs']['class'] = (!isset($args['button']['attrs']['class'])) ? 'btn btn-default' : $args['button']['attrs']['class'];
-
             $attrs_button = (!empty($args['button']['attrs'])) ? self::get_attrs($args['button']['attrs']) : null;
 
             return $html = "<button {$attrs_button}>{$args['label']}</button> ";
@@ -229,7 +228,22 @@ namespace Backfront\Form
 
         public static function url($args)
         {
-            
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['input']['attrs']['type'] = 'text';
+            $args['input']['attrs']['class'][] = "form-control";
+
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+
+            $html = sprintf("<label %s for=\"%s\">%s</label>", $attrs_label, $args['id'], $args['label']);
+
+            $html .= "<div class=\"input-group\">";
+            $html .= "   <div class=\"input-group-addon\">http://</div>";
+            $html .= sprintf("   <input %s>", $attrs_input);
+            $html .= "</div>";
+
+            return self::field_wrapp($html);
         }
 
         public static function color_picker($args)

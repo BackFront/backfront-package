@@ -37,6 +37,22 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 )
                             ))
                             ->addField(array(
+                                "id" => "bootstrap_url", //required
+                                "type" => "url", //required
+                                "label" => "URL field",
+                                "input" => array(
+                                    "attrs" => [
+                                        "placeholder" => "ex: google.com"
+                                    ]
+                                )
+                            ))
+                            ->addField(array(
+                                "id" => "bootstrap_file", //required
+                                "type" => "file_input", //required
+                                "multiple" => true, //optional
+                                "label" => "Basic Input File"
+                            ))
+                            ->addField(array(
                                 "id" => "bootstrap_field_textarea", //required
                                 "type" => "textarea", //required
                                 "label" => "Textarea", //optional
@@ -146,13 +162,6 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                         "class" => "btn btn-success"
                                     ))
                             ))
-                            ->addField(array("type" => "separator"))
-                            ->addField(array(
-                                "id" => "bootstrap_file", //required
-                                "type" => "file_input", //required
-                                "multiple" => true, //optional
-                                "label" => "Basic Input File"
-                            ))
                             ->build(true);
                     ?>
                 </div>
@@ -186,6 +195,12 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                         "placeholder" => "Placeholder"
                                     ]
                                 )
+                            ))
+                            ->addField(array(
+                                "id" => "semantic_file_input", //required
+                                "type" => "file_input", //required
+                                "multiple" => true, //optional
+                                "label" => "Basic Input File"
                             ))
                             ->addField(array(
                                 "id" => "semantic_field_textarea", //required
@@ -295,13 +310,6 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                     "attrs" => array(
                                         "class" => "ui basic button green"
                                     ))
-                            ))
-                            ->addField(array("type" => "separator"))
-                            ->addField(array(
-                                "id" => "semantic_file_input", //required
-                                "type" => "file_input", //required
-                                "multiple" => true, //optional
-                                "label" => "Basic Input File"
                             ))
                             ->build(true);
                     ?>
