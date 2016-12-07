@@ -150,6 +150,7 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                             ->addField(array(
                                 "id" => "bootstrap_file", //required
                                 "type" => "file_input", //required
+                                "multiple" => true, //optional
                                 "label" => "Basic Input File"
                             ))
                             ->build(true);

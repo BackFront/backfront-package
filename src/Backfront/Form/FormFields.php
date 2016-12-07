@@ -149,7 +149,7 @@ namespace Backfront\Form
         {
             
         }
-        
+
         /**
          * 
          * @see docs http://plugins.krajee.com/file-input
@@ -161,12 +161,12 @@ namespace Backfront\Form
             $args['input']['attrs']['type'] = 'file';
             $args['input']['attrs']['class'][] = "file";
             $args['input']['attrs']['data-min-file-count='] = 1;
-            
+
             $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
-            
+
             $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
-            $html .= "<input {$attrs_input} multiple>";
+            $html .= "<input {$attrs_input} " . self::is_multiple($args) . ">";
             return self::field_wrapp($html);
         }
 
