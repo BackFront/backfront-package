@@ -197,6 +197,16 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 )
                             ))
                             ->addField(array(
+                                "id" => "semantic_input_url", //required
+                                "type" => "url", //required
+                                "label" => "URL field",
+                                "input" => array(
+                                    "attrs" => [
+                                        "placeholder" => "ex: google.com"
+                                    ]
+                                )
+                            ))
+                            ->addField(array(
                                 "id" => "semantic_file_input", //required
                                 "type" => "file_input", //required
                                 "multiple" => true, //optional

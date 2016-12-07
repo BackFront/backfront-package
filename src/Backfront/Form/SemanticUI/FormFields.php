@@ -183,15 +183,33 @@ namespace Backfront\Form\SemanticUI
         {
             $title = $args['title'];
             $subtitle = (isset($args['subtitle'])) ? $args['subtitle'] : null;
-            
+
             $attrs = (!empty($args['attrs'])) ? self::get_attrs($args['attrs']) : null;
-            
+
             return sprintf("<h2 class=\"ui dividing header\" %s>%s <div class=\"sub header\">%s</div></h2>", $attrs, $title, $subtitle);
         }
 
         public static function separator()
         {
             return "<hr />";
+        }
+
+        public static function url($args)
+        {
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['input']['attrs']['type'] = 'text';
+
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+
+            $html = sprintf("<label %s for=\"%s\">%s</label>", $attrs_label, $args['id'], $args['label']);
+            $html .= "<div class=\"ui labeled fluid input\">";
+            $html .= "  <div class=\"ui label\">http:// </div>";
+            $html .= sprintf("  <input %s>", $attrs_input);
+            $html .= "</div>";
+            
+            return self::field_wrapp($html);
         }
 
         /**
@@ -235,7 +253,9 @@ namespace Backfront\Form\SemanticUI
 
         public static function field_wrapp($html_field, array $args = null)
         {
-            $class = (!empty($args['class'])) ? $args['class'] : 'field'; //default: semantic-ui class
+            $class = (!empty($args['class'])) ? $args['class'] : 'field
+
+            '; //default: semantic-ui class
             return "<div class=\"{$class}\">{$html_field}</div>";
         }
 
