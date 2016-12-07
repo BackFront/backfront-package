@@ -149,7 +149,16 @@ namespace Backfront\Form\SemanticUI
 
         public static function file_input($args)
         {
-            
+            $args['input']['attrs']['id'] = $args['id'];
+            $args['input']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['input']['attrs']['type'] = 'file';
+
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+
+            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
+            $html .= "<input {$attrs_input} " . self::is_multiple($args) . ">";
+            return self::field_wrapp($html);
         }
 
         public static function submit($args)

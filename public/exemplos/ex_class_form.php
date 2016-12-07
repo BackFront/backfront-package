@@ -279,7 +279,7 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                 "label" => "Default button"
                             ))
                             ->addField(array(
-                                "id" => "bootstrap_button", //required
+                                "id" => "_button", //required
                                 "type" => "button", //required
                                 "label" => "Primary",
                                 "button" => array(
@@ -288,13 +288,20 @@ $form_semantic_ui = new Form('form_semantic_ui', new FormFields);
                                     ))
                             ))
                             ->addField(array(
-                                "id" => "bootstrap_button", //required
+                                "id" => "semantic_button", //required
                                 "type" => "button", //required
                                 "label" => "Secundary",
                                 "button" => array(
                                     "attrs" => array(
                                         "class" => "ui basic button green"
                                     ))
+                            ))
+                            ->addField(array("type" => "separator"))
+                            ->addField(array(
+                                "id" => "semantic_file_input", //required
+                                "type" => "file_input", //required
+                                "multiple" => true, //optional
+                                "label" => "Basic Input File"
                             ))
                             ->build(true);
                     ?>
