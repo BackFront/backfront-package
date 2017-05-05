@@ -20,10 +20,12 @@
  * @since 1.0.0
  */
 
-namespace Wordpress {
+namespace Backfront\Wordpress
+{
 
-    class Application
+    class Application extends \Backfront\Singleton
     {
         
     }
+
 }
