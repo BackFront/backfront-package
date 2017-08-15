@@ -7,7 +7,7 @@
                     <thead>
                         <tr>
                             <th>Class Name</th>
-                            <th>Method</th>
+                            <th>Namespace</th>
                             <th>Current version</th>
                             <th>Link</th>
                         </tr>
@@ -17,10 +17,20 @@
                             <td>
                                 <b>Form</b>
                             </td>
-                            <td>***</td>
+                            <td>Form/</td>
                             <td>1.0.0</td>
                             <td>
-                                <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_form.php" role="button">Ver exemplos</a>
+                                <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_form.php" role="button">Ver documentação</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Application</b>
+                            </td>
+                            <td>Wordpress/</td>
+                            <td>1.0.0</td>
+                            <td>
+                                <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_wordpress-application.php" role="button">Ver documentação</a>
                             </td>
                         </tr>
                     </tbody>
