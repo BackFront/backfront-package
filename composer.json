@@ -19,11 +19,8 @@
     ],
     "require": {
         "phpmailer/phpmailer": "~5.2",
-        "silex/silex": "^2.*",
+        "silex/silex": "~2.0",
         "php": ">=5.6.0"
-    },
-    "require-dev": {
-        "phpdocumentor/phpdocumentor": "^2.*"
     },
     "autoload": {
         "psr-4": {
