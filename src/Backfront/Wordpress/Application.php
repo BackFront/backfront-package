@@ -23,7 +23,7 @@
 namespace Backfront\Wordpress
 {
 
-    class Application extends \Backfront\Singleton
+    class Application extends \Backfront\Application
     {
         
     }
