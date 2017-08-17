@@ -54,6 +54,8 @@ namespace Backfront
         {
             if (is_null(self::getInstance()->MDLPATH)):
                 trigger_error("It is not possible make calls to the module. It is necessary to specify the path to modules directory", E_USER_NOTICE);
+            else:
+                echo $moduleName;
             endif;
         }
 
