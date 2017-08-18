@@ -31,6 +31,7 @@ namespace Backfront
 
         const VERSION = '1.0';
 
+        protected $modules_enqueue = array();
         private $twig = null;
 
         /** @var string Path to modules directory */
