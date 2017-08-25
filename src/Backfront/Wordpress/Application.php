@@ -34,7 +34,7 @@ namespace Backfront\Wordpress
 
             global $wp_version;
 
-            if (version_compare($wp_version, self::WPREQUIRED, '>='))
+            if (!version_compare($wp_version, self::WPREQUIRED, '>='))
                 trigger_error("Wordpress required version same or above" . self::WPREQUIRED, E_USER_ERROR);
         }
 
