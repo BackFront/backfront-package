@@ -43,7 +43,7 @@
 namespace Backfront\Form
 {
 
-    abstract class FormFields implements IFormFields
+    class FormFields_Bootstrap implements IFormFields
     {
 
         public function __call($name, $arguments)
