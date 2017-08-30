@@ -55,6 +55,15 @@ namespace Backfront\Form
 
         public static function text($args)
         {
+            $default_args = array(
+                "input" => [
+                    "attrs" => [
+                        "id" => '',
+                        "name" => '',
+                        "type" => 'text',
+                    ]
+                ]
+            );
             $args['input']['attrs']['type'] = 'text';
             $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
