@@ -40,8 +40,10 @@ namespace Backfront
 
             $idx = $this->filterBuildUniqueId($tag, $function_to_add, $priority);
 
-            $this->actions[$tag][$priority][$idx] = array('function' => $function_to_add,
-                'accepted_args' => $accepted_args);
+            $this->actions[$tag][$priority][$idx] = array(
+                'function' => $function_to_add,
+                'accepted_args' => $accepted_args
+            );
             unset($this->merged_filters[$tag]);
             return true;
         }
@@ -124,7 +126,9 @@ namespace Backfront
                     if (!isset($function[0]->wp_filter_id)) {
                         if (false === $priority)
                             return false;
-                        $obj_idx .= isset($this->actions[$tag][$priority]) ? count((array) $this->actions[$tag][$priority]) : $filter_id_count;
+                        $obj_idx .= isset($this->actions[$tag][$priority]) ?
+                                count((array) $this->actions[$tag][$priority]) :
+                                $filter_id_count;
                         $function[0]->wp_filter_id = $filter_id_count;
                         ++$filter_id_count;
                     } else {
