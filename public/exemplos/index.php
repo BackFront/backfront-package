@@ -33,6 +33,16 @@
                                 <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_wordpress-application.php" role="button">Ver documentação</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <b>Tab</b>
+                            </td>
+                            <td>Generator/</td>
+                            <td>1.0.0</td>
+                            <td>
+                                <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_generator-tab.php" role="button">Ver documentação</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
