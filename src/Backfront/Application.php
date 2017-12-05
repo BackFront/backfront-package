@@ -70,7 +70,7 @@ namespace Backfront
         {
             if (is_null(self::getInstance()->twig)) {
                 if (is_null(self::getInstance()->TPLPATH)):
-                    trigger_error("It is not possible load twig. It is necessary to specify the path to templates directory", E_USER_NOTICE);
+                    trigger_error("It is not possible load twig cause is necessary to specify the path to templates directory before", E_USER_NOTICE);
                     return self::getInstance();
                 else:
                     $twigLoader = new Twig_Loader_Filesystem(self::getInstance()->TPLPATH);
