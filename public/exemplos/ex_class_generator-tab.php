@@ -2,6 +2,7 @@
 require_once (dirname(__FILE__) . '/../header.php');
 
 global $app;
+use Backfront\Generator\Tab;
 
 function content_tab_a()
 {
@@ -35,8 +36,6 @@ $tab_args_b = array(
     'id' => 'tab_item_id_b',
     'text' => 'Como instanciar a classe'
 );
-
-use Backfront\Generator\Tab;
 
 $tab = new Tab($app);
 $tab

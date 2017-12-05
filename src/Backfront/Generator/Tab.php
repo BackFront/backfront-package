@@ -76,7 +76,7 @@ namespace Backfront\Generator
          */
         public function build($show = false)
         {
-
+            
             $tab = $this->app->twig()->render('/Modules/Tab.twig', array(
                 'navs' => $this->navs,
                 'painels' => $this->panels
