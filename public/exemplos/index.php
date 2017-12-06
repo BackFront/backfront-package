@@ -27,10 +27,10 @@
                             <td>
                                 <b>Application</b>
                             </td>
-                            <td>Wordpress/</td>
+                            <td>/</td>
                             <td>1.0.0</td>
                             <td>
-                                <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_wordpress-application.php" role="button">Ver documentação</a>
+                                <a class="btn btn-default" href="<?php echo EXEMPLE_URL; ?>/ex_class_application.php" role="button">Ver documentação</a>
                             </td>
                         </tr>
                         <tr>

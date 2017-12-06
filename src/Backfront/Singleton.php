@@ -39,7 +39,6 @@ namespace Backfront
             if (null === $instance) {
                 $instance = new static();
             }
-
             return $instance;
         }
 
