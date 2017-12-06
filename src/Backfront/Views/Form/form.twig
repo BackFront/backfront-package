@@ -1,0 +1,7 @@
+{% block form %}
+    <form class="{{ form.class }}" action="{{ form.action }}" name="{{ form.class }}" {% form.attrs.setAttribute('action', action).setAttribute('teste', teste) %}>
+        {% block form_content %}
+            {{ form.content }}
+        {% endblock %}
+    </form>
+{% endblock %}
