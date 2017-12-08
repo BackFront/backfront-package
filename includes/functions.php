@@ -1,4 +1,8 @@
 <?php
+/**
+ * @todo Remover todas as funcoes de hook na versao 2.0
+ */
+
 global $wp_filter, $wp_actions, $merged_filters, $wp_current_filter;
 
 if (!isset($wp_filter))
