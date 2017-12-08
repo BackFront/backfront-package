@@ -37,7 +37,8 @@ namespace Backfront\Wordpress\Admin {
          * @param string $id                        The slug to this menu.
          * @param string $title                     The text to be displayed in the title tags of the page when the menu is selected.
          * @param string $capability                The required capacity to displaying this menu. <i>default: 'manage_options'</i>
-         * @param object/function $callback_menu    The callback that will show the content to this menu. <i>default: null</i>
+         * @param object/string $callback_menu      The callback that will show the content to this menu. <i>default: null</i>
+         * @param int $label                        Tha label aside of the submenu title. <i>default: null</i>
          * @param string $dashicon                  A icon for this menu @see https://developer.wordpress.org/resource/dashicons/#list-view. <i>default: ''</i>
          * @param string $position                  The position in the menu order this one should appear. <i>default: null</i>
          * 
@@ -45,14 +46,16 @@ namespace Backfront\Wordpress\Admin {
          * 
          * @see add_menu_page() https://developer.wordpress.org/reference/functions/add_menu_page/
          */
-        public function addMenu($id, $title, $capability = 'manage_options', $callback_menu = null, $dashicon = '', $position = null)
+        public function addMenu($id, $title, $capability = 'manage_options', $callback_menu = null, $label = null, $dashicon = '', $position = null)
         {
             $this->menu_id = $id;
             $this->menu_title = $title;
             $this->menu_capability = $capability;
             $this->menu_dashicon = $dashicon;
 
-            add_menu_page($this->menu_title, $this->menu_title, $this->menu_capability, $this->menu_id, $callback_menu, $this->menu_dashicon, $position);
+            $label = (!empty($label)) ? $this->setLabel($label) : null;
+
+            add_menu_page($this->menu_title, $this->menu_title . $label, $this->menu_capability, $this->menu_id, $callback_menu, $this->menu_dashicon, $position);
             return $this;
         }
 
@@ -60,18 +63,21 @@ namespace Backfront\Wordpress\Admin {
          * 
          * @param slug $submenu_id                      The slug name to refer to this menu by. Should be unique for this menu page and only include lowercase alphanumeric, dashes, and underscores characters to be compatible with
          * @param slug $title                           Title to the page this submenu
-         * @param type $capability                      The capability required for this menu to be displayed to the user.
-         * @param type $callback_menu                   The function to be called to output the content for this page.
+         * @param string $capability                    The capability required for this menu to be displayed to the user.
+         * @param object/string $callback_menu          The function to be called to output the content for this page.
+         * @param int $label                            Tha label aside of the submenu title.
          * 
          * @return \Backfront\Wordpress\Admin\Navegation
          * @see add_menu_page() https://developer.wordpress.org/reference/functions/add_submenu_page/
          */
-        public function addSubmenu($submenu_id, $title, $capability = 'manage_options', $callback_menu = null)
+        public function addSubmenu($submenu_id, $title, $capability = 'manage_options', $callback_menu = null, $label = null)
         {
             if (!isset($this->menu_id) || empty($this->menu_id))
                 trigger_error("Não é possível adicionar um submenu. Selecione um menu antes de adicionar um submenu. Use o método <i>setMenu()</i>", E_USER_ERROR);
 
-            add_submenu_page($this->menu_id, $title, $title, $capability, $submenu_id, $callback_menu);
+            $label = (!empty($label)) ? $this->setLabel($label) : null;
+
+            add_submenu_page($this->menu_id, $title, $title . $label, $capability, $submenu_id, $callback_menu);
 
             return $this;
         }
@@ -94,7 +100,6 @@ namespace Backfront\Wordpress\Admin {
          * @param type $menu_slug
          * @return \Backfront\Wordpress\Admin\AdminNavMenu
          */
-        
         public static function removeMenu($menu_slug)
         {
             remove_menu_page($menu_slug);
@@ -112,6 +117,11 @@ namespace Backfront\Wordpress\Admin {
         {
             remove_submenu_page($menu_slug, $submenu_slug);
             return self::class;
+        }
+
+        protected function setLabel($label_content)
+        {
+            return " <span class=\"update-plugins label-count\"><span class=\"update-count\">{$label_content}</span></span>";
         }
 
     }
