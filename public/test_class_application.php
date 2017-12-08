@@ -1,8 +1,15 @@
 <?php
 require_once(dirname(__FILE__) . "/../bootstrap.php");
 
-add_action('hello', function(){
-    echo 'hello world';
+
+$hook = new \Backfront\Hook();
+
+$hook->addAction('teste', function($a){
+    echo "hello world {$a}";
 });
 
-do_action('hello');
+$hook->addAction('teste', function($a){
+    echo "teste {$a}";
+});
+
+$hook->applyAction('teste', 1);

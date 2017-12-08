@@ -59,20 +59,18 @@ namespace Backfront\Form
                 "input" => [
                     "attrs" => [
                         "id" => '',
-                        "name" => '',
+                        "name" => (!empty($args['name'])) ? $args['name'] : $args['id'],
                         "type" => 'text',
                     ]
                 ]
             );
-            $args['input']['attrs']['type'] = 'text';
-            $args['input']['attrs']['id'] = $args['id'];
-            $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
 
+            $args_ = array_replace_recursive($default_args, $args);
 
-            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
-            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $attrs_input = (!empty($args_['input']['attrs'])) ? self::get_attrs($args_['input']['attrs']) : null;
+            $attrs_label = (!empty($args_['label']['attrs'])) ? self::get_attrs($args_['label']['attrs']) : null;
 
-            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
+            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']}</label>";
             $html .= "<input {$attrs_input}>";
 
             return self::field_wrapp($html);
@@ -80,13 +78,20 @@ namespace Backfront\Form
 
         public static function textarea($args)
         {
-            $args['value'] = (isset($args['value'])) ? $args['value'] : null;
-            $args['textarea']['attrs']['id'] = $args['id'];
-            $args['textarea']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
-            $args['textarea']['attrs']['row'] = (!empty($args['input']['attrs']['row'])) ? $args['row'] : 3;
+            $default_args = array(
+                "textarea" => [
+                    "attrs" => [
+                        "id" => $args['id'],
+                        "name" => (!empty($args['name'])) ? $args['name'] : $args['id'],
+                        "row" => 3,
+                    ]
+                ]
+            );
 
-            $attrs_textarea = (!empty($args['textarea']['attrs'])) ? self::get_attrs($args['textarea']['attrs']) : null;
-            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $args_ = array_replace_recursive($default_args, $args);
+
+            $attrs_textarea = (!empty($args_['textarea']['attrs'])) ? self::get_attrs($args_['textarea']['attrs']) : null;
+            $attrs_label = (!empty($args_['label']['attrs'])) ? self::get_attrs($args_['label']['attrs']) : null;
 
             $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
             $html .= "<textarea {$attrs_textarea}></textarea>";
@@ -95,13 +100,21 @@ namespace Backfront\Form
 
         public static function checkbox($args)
         {
-            $args['input']['attrs']['type'] = 'checkbox';
-            $args['input']['attrs']['id'] = $args['id'];
-            $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
-            $args['input']['attrs']['tabindex'] = 0;
-            $args['input']['attrs']['class'][] = 'hidden';
+            $default_args = array(
+                "input" => [
+                    "attrs" => [
+                        "id" => $args['id'],
+                        "name" => (!empty($args['name'])) ? $args['name'] : $args['id'],
+                        "type" => 'checkbox',
+                        "tabindex" => 0,
+                        "class" => array('hidden')
+                    ]
+                ]
+            );
 
-            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+            $args_ = array_replace_recursive($default_args, $args);
+
+            $attrs_input = (!empty($args_['input']['attrs'])) ? self::get_attrs($args_['input']['attrs']) : null;
 
             $html = "<div class=\"ui toggle checkbox " . self::is_checked($args) . "\"> ";
             $html .= "<input {$attrs_input} " . self::is_disabled($args) . ">";
@@ -217,7 +230,7 @@ namespace Backfront\Form
             $html .= "  <div class=\"ui label\">http:// </div>";
             $html .= sprintf("  <input %s>", $attrs_input);
             $html .= "</div>";
-            
+
             return self::field_wrapp($html);
         }
 
@@ -262,9 +275,7 @@ namespace Backfront\Form
 
         public static function field_wrapp($html_field, array $args = null)
         {
-            $class = (!empty($args['class'])) ? $args['class'] : 'field
-
-            '; //default: semantic-ui class
+            $class = (!empty($args['class'])) ? $args['class'] : 'field'; //default: semantic-ui class
             return "<div class=\"{$class}\">{$html_field}</div>";
         }
 

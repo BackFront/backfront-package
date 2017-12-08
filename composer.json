@@ -1,6 +1,6 @@
 {
     "name": "backfront/umbrella",
-    "description": "Halper Package and Toolkits Classes",
+    "description": "A package containing a toolkit to help on agile development of projects in general",
     "homepage": "http://alvesdouglas.com.br/",
     "keywords": [
         "backfront",
