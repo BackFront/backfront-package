@@ -1,14 +1,16 @@
 # Changelog
 Log de alterações do projeto [Backfront Package]
 
-#### [v0.1.0-beta] - 2018-12-06
-**New**
-- Feature 01 - *[@backfront]*
+#### [v0.1.0-beta] - 2018-12-08
+**New/Feature**
 
-______
+- Class _Hook_ - *[@backfront]*
+- Class _Application_ - *[@backfront]*
+- Class _Form\Form_ - *[@backfront]*
+- Class _Generator\Tab_ - *[@backfront]*
+- Class _Wordpress\Application_ - *[@backfront]*
+- Class _Wordpress\Admin\Navegation_ - *[@backfront]*
 
-**Contributors:**
-> **[@backfront]** _([Douglas A](http://alvesdouglas.com.br))_
 
 [Backfront Package]: https://github.com/BackFront/backfront-package/
 [@backfront]: https://github.com/backfront
