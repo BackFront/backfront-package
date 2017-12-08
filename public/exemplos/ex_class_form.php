@@ -2,10 +2,13 @@
 require_once (dirname(__FILE__) . '/../header.php');
 
 use Backfront\Form\Form;
-use Backfront\Form\SemanticUI\FormFields;
+use Backfront\Form\FormFields_SemanticUI;
+use Backfront\Form\FormFields_Bootstrap;
 
 $form = new Form('form_bootstrap');
-$form_semantic_ui = new Form('form_semantic_ui', new FormFields);
+//$form->setFormFields(new FormFields_Bootstrap); //other way to inject fields
+
+$form_semantic_ui = new Form('form_semantic_ui', new FormFields_SemanticUI); //injecting the fields on instantiation of the class
 ?>
 
 <div class="row">

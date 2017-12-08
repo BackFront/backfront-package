@@ -25,7 +25,7 @@ namespace Backfront\Form
 
     use Backfront\Form\FormFields;
 
-    class Form extends FormFields
+    class Form extends FormFields_Bootstrap
     {
         const CFRS_AUTH = true;
 
@@ -37,7 +37,7 @@ namespace Backfront\Form
         private $action = null;
         private $has_file = false;
         protected $fields_render;
-        protected $form_fields;
+        protected $form_fields;//Instance of IFormFields
         protected $csfr_token;
 
         /**
@@ -47,9 +47,21 @@ namespace Backfront\Form
          * @param FormFields $form_fields a abstract class responsible to generate the html of fields
          * @return \Backfront\Form\Form
          */
-        function __construct($form_id, $form_fields = null)
+        function __construct($form_id, IFormFields $form_fields = null)
         {
             $this->form_id = $form_id;
+            $this->form_fields = $form_fields;
+            return $this;
+        }
+        
+        /**
+         * <h3>setFormFields</h3>
+         * 
+         * @param IFormFields $form_fields instance of IFormFields
+         * @return \Backfront\Form
+         */
+        public function setFormFields(IFormFields $form_fields)
+        {
             $this->form_fields = $form_fields;
             return $this;
         }
@@ -125,7 +137,7 @@ namespace Backfront\Form
          */
         public function createField($args, $show = false)
         {
-            $form = ($this->form_fields) ? $this->form_fields->$args['type']($args) : self::$args['type']($args);
+            $form = (!empty($this->form_fields)) ? $this->form_fields->$args['type']($args) : self::$args['type']($args);
             if ($show) {
                 echo $form;
             }
