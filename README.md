@@ -36,7 +36,7 @@ Give examples
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/BackFront/2741cb87a8e8e491abc587f3ab0aaccc#file-contributing-md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](.gitdocs/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -44,7 +44,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Changelog
 
-You can see the changelog in [CHANGELOG.md](https://gist.github.com/BackFront/2741cb87a8e8e491abc587f3ab0aaccc#file-changelog-md). 
+You can see the changelog in [CHANGELOG.md](/.gitdocs/CHANGELOG.mg). 
 For the versions available, see the [tags on this repository](https://github.com/BackFront/backfront-package/releases).
 
 ## Authors
