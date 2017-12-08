@@ -1,6 +1,6 @@
 <?php
 /**
- * <h1>FormFields</h1>
+ * <h1>FormFieldsSemanticUI</h1>
  * 
  * Project Name: Backfront
  * Project URI: https://github.com/BackFront/umbrella-packege
@@ -43,7 +43,9 @@
 namespace Backfront\Form
 {
 
-    abstract class FormFields implements IFormFields
+    use Backfront\Form\IFormFields;
+
+    class FormFields_SemanticUI implements IFormFields
     {
 
         public function __call($name, $arguments)
@@ -51,22 +53,24 @@ namespace Backfront\Form
             trigger_error("O field de tipo <i>{$name}</i> não pode ser gerado", E_USER_WARNING);
         }
 
-        /**
-         * <h3>text</h3>
-         * 
-         * @param array $args
-         * @return string $html html of the input type text
-         */
         public static function text($args)
         {
-            $args['input']['attrs']['type'] = 'text';
-            $args['input']['attrs']['id'] = $args['id'];
-            $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $default_args = array(
+                "input" => [
+                    "attrs" => [
+                        "id" => '',
+                        "name" => (!empty($args['name'])) ? $args['name'] : $args['id'],
+                        "type" => 'text',
+                    ]
+                ]
+            );
 
-            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
-            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $args_ = array_replace_recursive($default_args, $args);
 
-            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
+            $attrs_input = (!empty($args_['input']['attrs'])) ? self::get_attrs($args_['input']['attrs']) : null;
+            $attrs_label = (!empty($args_['label']['attrs'])) ? self::get_attrs($args_['label']['attrs']) : null;
+
+            $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']}</label>";
             $html .= "<input {$attrs_input}>";
 
             return self::field_wrapp($html);
@@ -74,13 +78,20 @@ namespace Backfront\Form
 
         public static function textarea($args)
         {
-            $args['value'] = (isset($args['value'])) ? $args['value'] : null;
-            $args['textarea']['attrs']['id'] = $args['id'];
-            $args['textarea']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
-            $args['textarea']['attrs']['row'] = (!empty($args['input']['attrs']['row'])) ? $args['row'] : 3;
+            $default_args = array(
+                "textarea" => [
+                    "attrs" => [
+                        "id" => $args['id'],
+                        "name" => (!empty($args['name'])) ? $args['name'] : $args['id'],
+                        "row" => 3,
+                    ]
+                ]
+            );
 
-            $attrs_textarea = (!empty($args['textarea']['attrs'])) ? self::get_attrs($args['textarea']['attrs']) : null;
-            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
+            $args_ = array_replace_recursive($default_args, $args);
+
+            $attrs_textarea = (!empty($args_['textarea']['attrs'])) ? self::get_attrs($args_['textarea']['attrs']) : null;
+            $attrs_label = (!empty($args_['label']['attrs'])) ? self::get_attrs($args_['label']['attrs']) : null;
 
             $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
             $html .= "<textarea {$attrs_textarea}></textarea>";
@@ -89,51 +100,64 @@ namespace Backfront\Form
 
         public static function checkbox($args)
         {
-            $args['value'] = (isset($args['value'])) ? $args['value'] : null;
-            $args['input']['attrs']['type'] = 'checkbox';
-            $args['input']['attrs']['id'] = $args['id'];
-            $args['input']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $default_args = array(
+                "input" => [
+                    "attrs" => [
+                        "id" => $args['id'],
+                        "name" => (!empty($args['name'])) ? $args['name'] : $args['id'],
+                        "type" => 'checkbox',
+                        "tabindex" => 0,
+                        "class" => array('hidden')
+                    ]
+                ]
+            );
 
-            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+            $args_ = array_replace_recursive($default_args, $args);
 
-            $html = "<div class=\"checkbox " . self::is_disabled($args) . "}\">";
-            $html .= "<label>";
-            $html .= "<input {$attrs_input}" . self::is_checked($args) . self::is_disabled($args) . "> {$args['label']}";
-            $html .= "</label>";
+            $attrs_input = (!empty($args_['input']['attrs'])) ? self::get_attrs($args_['input']['attrs']) : null;
+
+            $html = "<div class=\"ui toggle checkbox " . self::is_checked($args) . "\"> ";
+            $html .= "<input {$attrs_input} " . self::is_disabled($args) . ">";
+            $html .= "<label>{$args['label']}</label>";
             $html .= "</div>";
 
-            return $html;
+            return self::field_wrapp($html, array("class" => "inline field " . self::is_disabled($args)));
         }
 
+        /**
+         * <h3>radio</h3>
+         * 
+         * @param array $args['variation'] Different styles, choice between: slider | toggle | radio(default)
+         */
         public static function radio($args)
         {
-            $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['type'] = 'radio';
             $args['input']['attrs']['value'] = (isset($args['value'])) ? $args['value'] : null;
-            $args['input']['attrs']['name'] = (!empty($args['name'])) ? $args['name'] : null;
+            $args['input']['attrs']['name'] = (!empty($args['name'])) ? $args['name'] : $args['id'];
+
+            $args['variation'] = (isset($args['variation'])) ? $args['variation'] : 'radio';
 
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
 
-            $html = "<div class=\"radio\">";
-            $html .= "  <label>";
-            $html .= "      <input {$attrs_input}" . self::is_checked($args) . self::is_disabled($args) . "> {$args['label']}";
-            $html .= "  </label>";
+            $html = "<div class=\"ui {$args['variation']} checkbox\">";
+            $html .= "  <input {$attrs_input}" . self::is_checked($args) . self::is_disabled($args) . "> ";
+            $html .= "  <label>{$args['label']}</label>";
             $html .= "</div>";
 
-            return $html;
+            return self::field_wrapp($html, array("class" => "inline field " . self::is_disabled($args)));
         }
 
         public static function select($args)
         {
             $args['select']['attrs']['id'] = $args['id'];
-            $args['select']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
-            $args['select']['attrs']['class'][] = "form-control";
+            $args['select']['attrs']['name'] = (!empty($args['input']['attrs']['name'])) ? $args['name'] : $args['id'];
+            $args['select']['attrs']['class'][] = "ui search selection dropdown";
 
             $attrs_select = (!empty($args['select']['attrs'])) ? self::get_attrs($args['select']['attrs']) : null;
             $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
 
             $html = "  <label {$attrs_label} for=\"{$args['id']}\">{$args['label']}</label>";
-            $html .= "<select {$attrs_select} " . self::is_multiple($args) . ">";
+            $html .= "<select {$attrs_select} " . self::is_multiple($args) . " data-dropdown>";
             foreach ($args['options'] as $key => $value) {
                 if (!is_array($value)):
                     $html .= "<option value=\"{$key}\" " . self::is_selected($key, $args['selected']) . ">{$value}</option>";
@@ -145,22 +169,11 @@ namespace Backfront\Form
             return self::field_wrapp($html);
         }
 
-        public static function number($args)
-        {
-            
-        }
-
-        /**
-         * 
-         * @see docs http://plugins.krajee.com/file-input
-         */
         public static function file_input($args)
         {
             $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
             $args['input']['attrs']['type'] = 'file';
-            $args['input']['attrs']['class'][] = "file";
-            $args['input']['attrs']['data-min-file-count='] = 1;
 
             $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
@@ -168,16 +181,6 @@ namespace Backfront\Form
             $html = "<label {$attrs_label} for=\"{$args['id']}\">{$args['label']} </label>";
             $html .= "<input {$attrs_input} " . self::is_multiple($args) . ">";
             return self::field_wrapp($html);
-        }
-
-        public static function drag_and_drop($args)
-        {
-            
-        }
-
-        public static function upload_image($args)
-        {
-            
         }
 
         public static function submit($args)
@@ -191,37 +194,24 @@ namespace Backfront\Form
             $args['button']['attrs']['id'] = $args['id'];
             $args['button']['attrs']['name'] = (!empty($args['button']['attrs']['name'])) ? $args['name'] : $args['id'];
 
-            $args['button']['attrs']['class'] = (!isset($args['button']['attrs']['class'])) ? 'btn btn-default' : $args['button']['attrs']['class'];
+            $args['button']['attrs']['class'] = (!isset($args['button']['attrs']['class'])) ? 'ui button' : $args['button']['attrs']['class'];
+
             $attrs_button = (!empty($args['button']['attrs'])) ? self::get_attrs($args['button']['attrs']) : null;
 
             return $html = "<button {$attrs_button}>{$args['label']}</button> ";
-        }
-
-        public static function hidden($args)
-        {
-            $args['input']['attrs']['type'] = "hidden";
-            $args['input']['attrs']['id'] = $args['id'];
-            $args['input']['attrs']['value'] = (isset($args['value'])) ? $args['value'] : null;
-
-            $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
-
-            return "<input {$attrs_input}>";
         }
 
         public static function title($args)
         {
             $title = $args['title'];
             $subtitle = (isset($args['subtitle'])) ? $args['subtitle'] : null;
+
             $attrs = (!empty($args['attrs'])) ? self::get_attrs($args['attrs']) : null;
 
-
-            $html = "<div class=\"page-header\">";
-            $html .= sprintf("<h3 %s>%s <small>%s</small></h3>", $attrs, $title, $subtitle);
-            $html .= "</div>";
-            return $html;
+            return sprintf("<h2 class=\"ui dividing header\" %s>%s <div class=\"sub header\">%s</div></h2>", $attrs, $title, $subtitle);
         }
 
-        public static function separator($args)
+        public static function separator()
         {
             return "<hr />";
         }
@@ -231,39 +221,17 @@ namespace Backfront\Form
             $args['input']['attrs']['id'] = $args['id'];
             $args['input']['attrs']['name'] = (!empty($args['select']['attrs']['name'])) ? $args['name'] : $args['id'];
             $args['input']['attrs']['type'] = 'text';
-            $args['input']['attrs']['class'][] = "form-control";
 
-            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
             $attrs_input = (!empty($args['input']['attrs'])) ? self::get_attrs($args['input']['attrs']) : null;
+            $attrs_label = (!empty($args['label']['attrs'])) ? self::get_attrs($args['label']['attrs']) : null;
 
             $html = sprintf("<label %s for=\"%s\">%s</label>", $attrs_label, $args['id'], $args['label']);
-
-            $html .= "<div class=\"input-group\">";
-            $html .= "   <div class=\"input-group-addon\">http://</div>";
-            $html .= sprintf("   <input %s>", $attrs_input);
+            $html .= "<div class=\"ui labeled fluid input\">";
+            $html .= "  <div class=\"ui label\">http:// </div>";
+            $html .= sprintf("  <input %s>", $attrs_input);
             $html .= "</div>";
 
             return self::field_wrapp($html);
-        }
-
-        public static function color_picker($args)
-        {
-            
-        }
-
-        public static function icon_picker($args)
-        {
-            
-        }
-
-        public static function date($args)
-        {
-            
-        }
-
-        public static function custom($args)
-        {
-            
         }
 
         /**
@@ -292,7 +260,7 @@ namespace Backfront\Form
 
         public static function is_checked($args)
         {
-            return (isset($args['checked']) && $args['checked'] === true) ? "checked='checked'" : null;
+            return (isset($args['checked']) && $args['checked'] === true) ? "checked" : null;
         }
 
         public static function is_disabled($args)
@@ -307,7 +275,7 @@ namespace Backfront\Form
 
         public static function field_wrapp($html_field, array $args = null)
         {
-            $class = (!empty($args['class'])) ? $args['class'] : 'form-group'; //default: bootstrap class
+            $class = (!empty($args['class'])) ? $args['class'] : 'field'; //default: semantic-ui class
             return "<div class=\"{$class}\">{$html_field}</div>";
         }
 

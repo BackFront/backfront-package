@@ -1,6 +1,6 @@
 {
     "name": "backfront/umbrella",
-    "description": "Halper Package",
+    "description": "A package containing a toolkit to help on agile development of projects in general",
     "homepage": "http://alvesdouglas.com.br/",
     "keywords": [
         "backfront",
@@ -9,6 +9,7 @@
         "ajax"
     ],
     "license": "Apache License 2.0",
+    "type": "library",
     "authors": [
         {
             "name": "Douglas Alves",
@@ -17,7 +18,13 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/backfront/umbrella/issues",
+        "source": "https://github.com/backfront/umbrella",
+        "email": "alves.douglaz@gmail.com"
+    },
     "require": {
+        "phpmailer/phpmailer": "~5.2",
         "twig/twig": "^1.24",
         "silex/silex": "~2.0",
         "php": ">=5.6.0"

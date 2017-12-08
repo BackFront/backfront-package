@@ -1,0 +1,25 @@
+<div class="umb umb-page">
+    <div class="ui container-fluid">
+        <div class="col-md-3">
+            <div class="ui vertical fluid tabular umb menu" data-menu>
+                {% for nav in navs %}
+                    <a class="item{{ nav.active }}" data-tab="{{ nav.id }}">
+                        {{nav.text}}
+                        {% if nav.label %}
+                            <div class="ui label">{{ nav.label }}</div>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="ui segment">
+                {% for painel in painels %}
+                    <div class="ui tab{{ painel.active }}" data-tab="{{ painel.id }}">
+                        {{ painel.html|raw }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
