@@ -24,10 +24,12 @@
         "email": "alves.douglaz@gmail.com"
     },
     "require": {
+        "php": ">=5.6.0",
         "phpmailer/phpmailer": "~5.2",
         "twig/twig": "^1.24",
         "silex/silex": "~2.0",
-        "php": ">=5.6.0"
+        "drewjbartlett/wordpress-eloquent": "^0.2.1",
+        "pimple/pimple": "^3.2"
     },
     "autoload": {
         "psr-4": {
