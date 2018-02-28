@@ -8,7 +8,7 @@
         "post",
         "ajax"
     ],
-    "license": "Apache License 2.0",
+    "license": "Apache-2.0",
     "type": "library",
     "authors": [
         {
@@ -28,7 +28,6 @@
         "phpmailer/phpmailer": "~5.2",
         "twig/twig": "^1.24",
         "silex/silex": "~2.0",
-        "drewjbartlett/wordpress-eloquent": "^0.2.1",
         "pimple/pimple": "^3.2"
     },
     "autoload": {
