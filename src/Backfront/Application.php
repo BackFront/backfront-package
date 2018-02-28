@@ -24,6 +24,7 @@ namespace Backfront {
 
     use Twig_Loader_Filesystem;
     use Twig_Environment;
+    use Pimple\Container;
 
     class Application extends Singleton
     {
@@ -32,6 +33,7 @@ namespace Backfront {
 
         protected $modules_enqueue = array();
         private $twig = null;
+        private $container= null;
 
         /** @var string Path to modules directory */
         public $MDLPATH = null;
