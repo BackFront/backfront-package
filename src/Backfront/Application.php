@@ -89,12 +89,5 @@ namespace Backfront {
                 return dirname($path) . $inc;
             }
         }
-
-        public static function container()
-        {
-            if(is_null(self::getInstance()->container))
-                return self::getInstance()->container = new Container;
-            return self::getInstance()->contianer;
-        }
     }
 }
