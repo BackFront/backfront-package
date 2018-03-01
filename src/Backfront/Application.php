@@ -24,7 +24,7 @@ namespace Backfront {
 
     use Twig_Loader_Filesystem;
     use Twig_Environment;
-    use Pimple\Container;
+    use Rakit\Validation\Validator;
 
     class Application extends Singleton
     {
@@ -33,7 +33,6 @@ namespace Backfront {
 
         protected $modules_enqueue = array();
         private $twig = null;
-        private $container= null;
 
         /** @var string Path to modules directory */
         public $MDLPATH = null;
@@ -88,6 +87,19 @@ namespace Backfront {
             } else {
                 return dirname($path) . $inc;
             }
+        }
+
+        /**
+         * Return a instance of Validator Class
+         *
+         * @return Validator
+         */
+        public static function validator(): Validator
+        {
+            if(is_null(self::getInstance()->validator)):
+                return self::getInstance()->twig = new Validator;
+            endif;
+            return self::getInstance()->validator;
         }
     }
 }
