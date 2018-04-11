@@ -25,6 +25,7 @@ namespace Backfront
 
     abstract class Singleton
     {
+        static $instance = null;
 
         /**
          * Returns a unique instance of a class.
@@ -35,11 +36,10 @@ namespace Backfront
          */
         public static function getInstance()
         {
-            static $instance = null;
-            if (null === $instance) {
-                $instance = new static();
+            if (null === self::$instance) {
+                self::$instance = new static();
             }
-            return $instance;
+            return self::$instance;
         }
 
         /**
