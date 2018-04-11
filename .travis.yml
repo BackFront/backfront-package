@@ -1,0 +1,6 @@
+{
+  "language": "php",
+  "os": "linux",
+  "group": "stable",
+  "dist": "trusty"
+}
