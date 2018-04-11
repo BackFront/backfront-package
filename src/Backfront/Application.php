@@ -94,7 +94,7 @@ namespace Backfront {
          *
          * @return Validator
          */
-        public static function validator(): Validator
+        public static function validator():Validator
         {
             if(is_null(self::getInstance()->validator)):
                 return self::getInstance()->twig = new Validator;
