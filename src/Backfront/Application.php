@@ -66,19 +66,19 @@ namespace Backfront {
          * Obs: Before is necessary set the '$TPLPATH'
          *
          */
-//        public static function twig()
-//        {
-//            if(is_null(self::getInstance()->twig)) {
-//                if(is_null(self::getInstance()->TPLPATH)):
-//                    trigger_error("It is not possible load twig cause is necessary to specify the path to templates directory before", E_USER_NOTICE);
-//                    return self::getInstance();
-//                else:
-//                    $twigLoader = new Twig_Loader_Filesystem(self::getInstance()->TPLPATH);
-//                    return self::getInstance()->twig = new Twig_Environment($twigLoader);
-//                endif;
-//            }
-//            return self::getInstance()->twig;
-//        }
+        public static function twig()
+        {
+            if(is_null(self::getInstance()->twig)) {
+                if(is_null(self::getInstance()->TPLPATH)):
+                    trigger_error("It is not possible load twig cause is necessary to specify the path to templates directory before", E_USER_NOTICE);
+                    return self::getInstance();
+                else:
+                    $twigLoader = new Twig_Loader_Filesystem(self::getInstance()->TPLPATH);
+                    return self::getInstance()->twig = new Twig_Environment($twigLoader);
+                endif;
+            }
+            return self::getInstance()->twig;
+        }
 
         public static function dirname($path, $levels = 1, $inc = null)
         {
