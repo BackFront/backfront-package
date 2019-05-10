@@ -34,6 +34,8 @@ namespace Backfront {
         protected $modules_enqueue = array();
         private $twig = null;
 
+        public $providers = [];
+
         /** @var string Path to modules directory */
         public $MDLPATH = null;
 
@@ -43,6 +45,11 @@ namespace Backfront {
         /** @var string Absolute application URL */
         public $ABSURL = null;
         public $TPLPATH = null;
+
+        public function boot()
+        {
+            dump("boot application");
+        }
 
         /**
          * This method is responsible to register and call a module
@@ -94,7 +101,7 @@ namespace Backfront {
          *
          * @return Validator
          */
-        public static function validator():Validator
+        public static function validator() : Validator
         {
             if(is_null(self::getInstance()->validator)):
                 return self::getInstance()->twig = new Validator;
