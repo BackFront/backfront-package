@@ -7,7 +7,7 @@
 
   <h1 align="center">Backfront Package Toolkit</h1>
 
-  <p align="center">A package containing a toolkit to help on agile development of projects in general</p>
+  <p align="center">A package containing a toolkit to help on agile development of projects on general</p>
 </p>
 
 <br>
