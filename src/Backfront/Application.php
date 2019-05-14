@@ -22,6 +22,8 @@
 
 namespace Backfront {
 
+    use Pimple\Container;
+    use Jonsa\PimpleResolver\ServiceProvider;
     use Twig_Loader_Filesystem;
     use Twig_Environment;
     use Rakit\Validation\Validator;
@@ -32,23 +34,50 @@ namespace Backfront {
         const VERSION = '1.0';
 
         protected $modules_enqueue = array();
-        private $twig = null;
 
-        public $providers = [];
+        /**
+         * @var Twig_Environment $twig
+         */
+        public $twig = null;
 
-        /** @var string Path to modules directory */
+        protected $providers = [];
+        protected $booted = false;
+
+        public $container;
+
+        /** @var string $MDLPATH Path to modules directory */
         public $MDLPATH = null;
 
-        /** @var string Absolute application path */
+        /** @var string $ABSPATH Absolute application path */
         public $ABSPATH = null;
 
-        /** @var string Absolute application URL */
+        /** @var string $ABSURL Absolute application URL */
         public $ABSURL = null;
         public $TPLPATH = null;
 
+        public function __construct()
+        {
+            $this->container = (new Container)->register(new ServiceProvider);
+        }
+
+        /**
+         * Boots all service providers.
+         *
+         * This method is automatically called by handle(), but you can use it
+         * to boot all service providers when not handling a request.
+         */
         public function boot()
         {
-            dump("boot application");
+            if($this->booted)
+                return;
+
+            $this->booted = true;
+
+            foreach ($this->providers as $provider):
+                if ($provider instanceof BootableProviderInterface):
+                    $provider->boot($this);
+                endif;
+            endforeach;
         }
 
         /**
@@ -107,6 +136,13 @@ namespace Backfront {
                 return self::getInstance()->twig = new Validator;
             endif;
             return self::getInstance()->validator;
+        }
+
+        protected static function registerFunctions(\Twig_Environment $twig)
+        {
+            $twig->addFunction(new \Twig_SimpleFunction('assets', function($src = null) {
+                return UMB_ASSETS . DIRECTORY_SEPARATOR . $src;
+            }));
         }
     }
 }
