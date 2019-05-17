@@ -24,6 +24,7 @@ namespace Backfront {
 
     use Pimple\Container;
     use Jonsa\PimpleResolver\ServiceProvider;
+    use Pimple\ServiceProviderInterface;
     use Twig_Loader_Filesystem;
     use Twig_Environment;
     use Rakit\Validation\Validator;
@@ -40,9 +41,13 @@ namespace Backfront {
          */
         public $twig = null;
 
-        protected $providers = [];
+        protected $serviceProviders = [];
+        protected $loadedProviders = [];
+
+        /** @var bool $booted make a booted application */
         protected $booted = false;
 
+        /** @var \Pimple\Container $container Instance of Pimple Container */
         public $container;
 
         /** @var string $MDLPATH Path to modules directory */
@@ -114,6 +119,89 @@ namespace Backfront {
                 endif;
             }
             return self::getInstance()->twig;
+        }
+
+        /**
+         * Register a service provider with the application.
+         *
+         * @param  \Backfront\Support\ServiceProvider|string  $provider
+         * @param  array  $options
+         * @param  bool   $force
+         * @return \Backfront\Support\ServiceProvider
+         */
+        public function register($provider, $options = [], $force = false)
+        {
+            if(($registered = $this->getProvider($provider)) && !$force)
+                return $registered;
+
+            // If the given "provider" is a string, we will resolve it, passing in the
+            // application instance automatically for the developer. This is simply
+            // a more convenient way of specifying your service provider classes.
+            if(is_string($provider))
+                $provider = $this->resolveProvider($provider);
+
+            if(method_exists($provider, 'register'))
+                $provider->register($this->container);
+
+            $this->markAsRegistered($provider);
+
+            // If the application has already booted, we will call this boot method on
+            // the provider class so it has an opportunity to do its boot logic and
+            // will be ready for any usage by this developer's application logic.
+            if($this->booted)
+                $this->bootProvider($provider);
+
+            return $provider;
+        }
+
+        /**
+         * Resolve a service provider instance from the class name.
+         *
+         * @param  string  $provider
+         * @return \Backfront\Support\ServiceProvider
+         */
+        public function resolveProvider($provider)
+        {
+            return new $provider($this);
+        }
+
+        /**
+         * Get the registered service provider instance if it exists.
+         *
+         * @param  \Backfront\Support\ServiceProvider|string  $provider
+         * @return \Backfront\Support\ServiceProvider|null
+         */
+        public function getProvider($provider)
+        {
+            return array_values($this->getProviders($provider))[0] ?? null;
+        }
+
+        /**
+         * Get the registered service provider instances if any exist.
+         *
+         * @param  \Backfront\Support\ServiceProvider|string  $provider
+         * @return array
+         */
+        public function getProviders($provider)
+        {
+            $name = is_string($provider) ? $provider : get_class($provider);
+
+            return array_filter($this->serviceProviders, function ($value) use ($name) {
+                return $value instanceof $name;
+            }, ARRAY_FILTER_USE_BOTH);
+        }
+
+        /**
+         * Mark the given provider as registered.
+         *
+         * @param  \Backfront\Support\ServiceProvider $provider
+         * @return void
+         */
+        protected function markAsRegistered($provider)
+        {
+            $this->serviceProviders[] = $provider;
+
+            $this->loadedProviders[get_class($provider)] = true;
         }
 
         public static function dirname($path, $levels = 1, $inc = null)

@@ -2,7 +2,9 @@
 
 namespace Backfront\Support
 {
-    abstract class ServiceProvider
+    use Pimple\ServiceProviderInterface;
+
+    abstract class ServiceProvider implements  ServiceProviderInterface
     {
         /**
          * The application instance.

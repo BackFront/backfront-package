@@ -1,7 +1,7 @@
 <?php
 
-namespace Backfront\Traits
-{
+namespace Backfront\Traits {
+
     trait Singleton
     {
         static $instance = null;
@@ -15,8 +15,7 @@ namespace Backfront\Traits
          */
         public static function getInstance()
         {
-            if (null === self::$instance)
-                self::$instance = new static();
+            if(null === self::$instance) self::$instance = new static();
 
             return self::$instance;
         }
@@ -50,5 +49,6 @@ namespace Backfront\Traits
         {
 
         }
+
     }
 }
