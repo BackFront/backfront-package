@@ -243,13 +243,6 @@ namespace Backfront {
             return self::getInstance()->validator;
         }
 
-        protected static function registerFunctions(\Twig_Environment $twig)
-        {
-            $twig->addFunction(new \Twig_SimpleFunction('assets', function($src = null) {
-                return UMB_ASSETS . DIRECTORY_SEPARATOR . $src;
-            }));
-        }
-
         /**
          * Call the given Closure / class@method and inject its dependencies.
          *
