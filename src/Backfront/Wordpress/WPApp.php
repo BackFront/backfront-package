@@ -28,22 +28,18 @@ namespace Backfront\Wordpress
 
     class WPApp extends \Backfront\Application
     {
-
         const WPREQUIRED = '4.8';
+
+        public $ASSETS_PATH;
 
         function Start()
         {
-            dump(__CLASS__ . "::" .__METHOD__);
-            dump(get_parent_class(__CLASS__));
-            dump(self::getInstance()->testeAppBase());
-//            parent::__construct();
-
             global $wp_version;
 
             if (!version_compare($wp_version, self::WPREQUIRED, '>='))
                 trigger_error("Wordpress required version same or above" . self::WPREQUIRED, E_USER_ERROR);
+
+            parent::boot();
         }
-
     }
-
 }
