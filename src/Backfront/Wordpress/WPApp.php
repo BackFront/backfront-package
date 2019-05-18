@@ -23,21 +23,23 @@
 namespace Backfront\Wordpress
 {
 
-    class Application extends \Backfront\Application
-    {
+    use phpDocumentor\Reflection\Types\Self_;
+    use \Backfront\Traits\Singleton;
 
+    class WPApp extends \Backfront\Application
+    {
         const WPREQUIRED = '4.8';
 
-        function __construct()
-        {
-            parent::__construct();
+        public $ASSETS_PATH;
 
+        function Start()
+        {
             global $wp_version;
 
             if (!version_compare($wp_version, self::WPREQUIRED, '>='))
                 trigger_error("Wordpress required version same or above" . self::WPREQUIRED, E_USER_ERROR);
+
+            parent::boot();
         }
-
     }
-
 }
