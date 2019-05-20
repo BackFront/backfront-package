@@ -32,7 +32,7 @@ namespace Backfront\Wordpress
 
         public $ASSETS_PATH;
 
-        function Start()
+        function init()
         {
             global $wp_version;
 
